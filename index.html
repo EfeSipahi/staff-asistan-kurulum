@@ -52,7 +52,7 @@
   .adim .no { width: 34px; height: 34px; border-radius: 50%; background: var(--ana); color: var(--ana-yazi); display: grid; place-items: center; font-weight: 700; }
   .adim > div > :last-child { margin-bottom: 0; }
   figure { margin: 14px 0 0; }
-  figure img { display: block; width: 100%; max-width: 560px; height: auto; border: 1px solid var(--cizgi); border-radius: 10px; }
+  figure img { display: block; width: auto; max-width: min(100%, 560px); height: auto; border: 1px solid var(--cizgi); border-radius: 10px; }
   .not { border-radius: 8px; padding: 10px 12px; margin: 12px 0 0; font-size: 15px; background: var(--uyari-acik); color: var(--uyari); }
   kbd { font: inherit; font-weight: 600; white-space: nowrap; }
   details { border-top: 1px solid var(--cizgi); padding: 12px 0; }
@@ -111,12 +111,20 @@
 
       <div class="kart adim"><span class="no">1</span><div>
         <h3>İndirin</h3>
-        <p>Yukarıdaki <kbd>İndir</kbd> düğmesine basın. Edge "yaygın olarak indirilmiyor" derse dosyanın yanındaki <kbd>…</kbd> düğmesine basın, <kbd>Sakla</kbd>'yı seçin, sonra <kbd>Daha fazla göster</kbd> → <kbd>Yine de sakla</kbd>.</p>
+        <p>Yukarıdaki <kbd>İndir</kbd> düğmesine basın. Program yeni olduğu ve yaygın indirilmediği için Edge uyarı verir:</p>
+        <ol>
+          <li>İndirilenler listesinde uyarının üstüne gelin, <kbd>…</kbd> düğmesine basın ve <kbd>Sakla</kbd>'yı (Keep) seçin.</li>
+          <li>Açılan pencerede <kbd>Sil</kbd> (Delete) düğmesinin yanındaki oka basın ve <kbd>Yine de sakla</kbd>'yı (Keep anyway) seçin.</li>
+        </ol>
+        <p class="soluk">Chrome genellikle uyarmadan indirir.</p>
+        <figure><img src="img/edge-1-sakla.png" alt="Edge indirme uyarısı: … menüsünde Sakla (Keep)" width="476" height="290" loading="lazy"></figure>
+        <figure><img src="img/edge-2-yine-de-sakla.png" alt="Edge: Sil düğmesinin okundan Yine de sakla (Keep anyway)" width="372" height="448" loading="lazy"></figure>
       </div></div>
 
       <div class="kart adim"><span class="no">2</span><div>
         <h3>Çalıştırın</h3>
-        <p>İndirilen <b>StaffAsistan.exe</b> dosyasına çift tıklayın. "Windows kişisel bilgisayarınızı korudu" çıkarsa <kbd>Ek bilgi</kbd> → <kbd>Yine de çalıştır</kbd>. Kurulum penceresi açılır.</p>
+        <p>İndirilenler listesinde <kbd>Dosyayı aç</kbd>'a (Open file) basın ya da İndirilenler klasöründe <b>StaffAsistan.exe</b>'ye çift tıklayın. "Windows kişisel bilgisayarınızı korudu" (Windows protected your PC) çıkarsa <kbd>Ek bilgi</kbd> (More info) → <kbd>Yine de çalıştır</kbd> (Run anyway). Kurulum penceresi açılır.</p>
+        <figure><img src="img/windows-yine-de-calistir.png" alt="Windows SmartScreen: Ek bilgiden sonra Yine de çalıştır (Run anyway)" width="532" height="498" loading="lazy"></figure>
       </div></div>
 
       <div class="kart adim"><span class="no">3</span><div>
@@ -158,7 +166,7 @@
         <ol>
           <li>Bu sayfadan yeni dosyayı indirin.</li>
           <li>Claude Desktop'u tamamen kapatın (sistem tepsisi → Claude → <kbd>Exit</kbd>).</li>
-          <li>İndirilen dosyaya çift tıklayın; açılan pencerede Claude Desktop satırındaki <kbd>Güncelle</kbd>'ye basın.</li>
+          <li>İndirilen dosyayı açın (uyarılar kurulumdaki gibi). Açılan pencerede Claude Desktop satırındaki <kbd>Güncelle</kbd>'ye, sonraki ekranda bir kez daha <kbd>Güncelle</kbd>'ye basın. "Kurulu ve güncel" yazınca <kbd>İleri</kbd> → <kbd>Kapat</kbd>.</li>
           <li>Claude Desktop'u açın.</li>
         </ol>
         <p class="soluk">Lisans, panel hesabı ve WhatsApp bağlantısı olduğu gibi kalır.</p>
@@ -192,7 +200,7 @@
       <div class="kart">
         <details>
           <summary>Edge ya da Windows dosyayı açmama izin vermiyor</summary>
-          <p>Program yeni ve yaygın olmadığı için Windows uyarı verir. Dosyayı yalnızca bu sayfadan indirdiyseniz: Edge'de <kbd>…</kbd> → <kbd>Sakla</kbd> → <kbd>Daha fazla göster</kbd> → <kbd>Yine de sakla</kbd>; açarken <kbd>Ek bilgi</kbd> → <kbd>Yine de çalıştır</kbd>.</p>
+          <p>Program yeni ve yaygın olmadığı için Windows uyarı verir. Dosyayı yalnızca bu sayfadan indirdiyseniz: Edge'de <kbd>…</kbd> → <kbd>Sakla</kbd> → <kbd>Sil</kbd>'in yanındaki ok → <kbd>Yine de sakla</kbd>; açarken <kbd>Ek bilgi</kbd> → <kbd>Yine de çalıştır</kbd> (adımlar <a href="#kurulum">Kurulum</a>'da resimli).</p>
         </details>
         <details>
           <summary>Claude Desktop'ta Staff Asistan görünmüyor</summary>
