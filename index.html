@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="google" content="notranslate">
+<title>Staff Asistan Kurulumu</title>
+<meta name="description" content="Staff Asistan'ı indirin ve Claude Desktop'a kurun.">
+<link rel="icon" type="image/png" href="img/simge.png">
+<style>
+  /* Kurulum penceresiyle aynı renkler (staff-asistan/data/kurulum.html): siyah, beyaz; vurgu logodaki kırmızı. */
+  :root {
+    --zemin: #f4f4f5; --kart: #ffffff; --metin: #18181b; --soluk: #62626b; --cizgi: #e2e2e6;
+    --ana: #18181b; --ana-koyu: #000000; --ana-yazi: #ffffff; --vurgu: #9d2b2b;
+    --uyari: #8a5a00; --uyari-acik: #fff4dc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --zemin: #121214; --kart: #1c1c1f; --metin: #ececee; --soluk: #a0a0a8; --cizgi: #2e2e33;
+      --ana: #ececee; --ana-koyu: #ffffff; --ana-yazi: #111113; --vurgu: #d0705a;
+      --uyari: #e8b54d; --uyari-acik: #2d2615;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--zemin); color: var(--metin); font: 16px/1.6 "Segoe UI", system-ui, sans-serif; }
+  .kap { max-width: 780px; margin: 0 auto; padding: 28px 16px 48px; }
+  header { display: flex; align-items: center; gap: 16px; }
+  .logo { height: 72px; width: auto; display: block; border-radius: 10px; }
+  header h1 { font-size: 22px; margin: 0; font-weight: 600; }
+  header small { display: block; color: var(--soluk); font-size: 14px; font-weight: 400; }
+  .kart { background: var(--kart); border: 1px solid var(--cizgi); border-radius: 12px; padding: 22px 24px; margin-top: 16px; }
+  .indir { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap; margin-top: 24px; }
+  .indir h2 { margin: 0 0 4px; }
+  .indir p { margin: 0; }
+  a.dugme { display: inline-flex; align-items: center; gap: 10px; background: var(--ana); color: var(--ana-yazi); text-decoration: none; font-weight: 600;
+    font-size: 17px; padding: 12px 22px; border-radius: 10px; }
+  a.dugme:hover { background: var(--ana-koyu); }
+  a.dugme svg { width: 20px; height: 20px; flex: none; }
+  .surum { font-size: 14px; color: var(--soluk); }
+  nav { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 22px 0 0; font-size: 15px; }
+  nav a, main a { color: var(--metin); }
+  h2 { font-size: 19px; margin: 0 0 8px; }
+  section > h2 { margin-top: 40px; scroll-margin-top: 16px; }
+  h3 { font-size: 16px; margin: 0 0 6px; }
+  p { margin: 0 0 10px; }
+  .soluk { color: var(--soluk); }
+  ul, ol { margin: 0 0 10px; padding-left: 22px; }
+  li { margin: 4px 0; }
+  .adim { display: grid; grid-template-columns: 34px 1fr; gap: 0 14px; }
+  .adim .no { width: 34px; height: 34px; border-radius: 50%; background: var(--ana); color: var(--ana-yazi); display: grid; place-items: center; font-weight: 700; }
+  .adim > div > :last-child { margin-bottom: 0; }
+  figure { margin: 14px 0 0; }
+  figure img { display: block; width: 100%; max-width: 560px; height: auto; border: 1px solid var(--cizgi); border-radius: 10px; }
+  .not { border-radius: 8px; padding: 10px 12px; margin: 12px 0 0; font-size: 15px; background: var(--uyari-acik); color: var(--uyari); }
+  kbd { font: inherit; font-weight: 600; white-space: nowrap; }
+  details { border-top: 1px solid var(--cizgi); padding: 12px 0; }
+  details:first-of-type { border-top: 0; padding-top: 0; }
+  summary { cursor: pointer; font-weight: 600; }
+  details > :not(summary) { margin-top: 8px; }
+  #notlar { white-space: pre-line; }
+  footer { margin-top: 40px; font-size: 14px; color: var(--soluk); text-align: center; }
+  footer a { color: var(--soluk); }
+  footer code { font-size: 12px; word-break: break-all; }
+  @media (max-width: 520px) {
+    .kart { padding: 18px 16px; }
+    .adim { grid-template-columns: 1fr; }
+    .adim .no { margin-bottom: 8px; }
+    a.dugme { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="kap">
+  <header>
+    <img class="logo" src="img/logo.png" alt="Staff Ajans Asistan" width="131" height="72">
+    <div><h1>Staff Asistan</h1><small>Claude Desktop için Staff Ajans asistanı</small></div>
+  </header>
+
+  <div class="kart indir">
+    <div>
+      <h2>Staff Asistan'ı indirin</h2>
+      <p class="soluk">Windows 10 / 11 (64 bit). Kurulum ve güncelleme aynı dosyayla yapılır.</p>
+      <p class="surum" id="surum" hidden></p>
+    </div>
+    <a class="dugme" id="indir" href="https://github.com/EfeSipahi/staff-asistan-kurulum/releases/latest/download/StaffAsistan.exe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+      İndir
+    </a>
+  </div>
+
+  <nav aria-label="Bölümler">
+    <a href="#kurulum">Kurulum</a><a href="#guncelleme">Güncelleme</a><a href="#ayarlar">Ayarları değiştirme</a><a href="#kaldirma">Kaldırma</a><a href="#sorunlar">Sorun giderme</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2 id="once">Başlamadan önce</h2>
+      <div class="kart">
+        <ul>
+          <li><a href="https://claude.ai/download">Claude Desktop</a> kurulu ve hesabınızla giriş yapılmış olmalı.</li>
+          <li>Lisans anahtarınız (Staff Asistan sağlayıcısından alınır; ajansın bütün bilgisayarlarında aynı anahtar kullanılır).</li>
+          <li>personel.staffajans.com hesabınızın e-postası ve şifresi.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2 id="kurulum">Kurulum</h2>
+
+      <div class="kart adim"><span class="no">1</span><div>
+        <h3>İndirin</h3>
+        <p>Yukarıdaki <kbd>İndir</kbd> düğmesine basın. Edge "yaygın olarak indirilmiyor" derse dosyanın yanındaki <kbd>…</kbd> düğmesine basın, <kbd>Sakla</kbd>'yı seçin, sonra <kbd>Daha fazla göster</kbd> → <kbd>Yine de sakla</kbd>.</p>
+      </div></div>
+
+      <div class="kart adim"><span class="no">2</span><div>
+        <h3>Çalıştırın</h3>
+        <p>İndirilen <b>StaffAsistan.exe</b> dosyasına çift tıklayın. "Windows kişisel bilgisayarınızı korudu" çıkarsa <kbd>Ek bilgi</kbd> → <kbd>Yine de çalıştır</kbd>. Kurulum penceresi açılır.</p>
+      </div></div>
+
+      <div class="kart adim"><span class="no">3</span><div>
+        <h3>Lisans anahtarı</h3>
+        <p>Size verilen lisans anahtarını yapıştırın ve <kbd>Doğrula</kbd>'ya basın.</p>
+        <figure><img src="img/1-lisans.png" alt="Lisans anahtarı ekranı" width="724" height="493" loading="lazy"></figure>
+      </div></div>
+
+      <div class="kart adim"><span class="no">4</span><div>
+        <h3>Panel hesabı</h3>
+        <p>personel.staffajans.com'a girdiğiniz e-posta ve şifreyi yazıp <kbd>Giriş yap</kbd>'a basın. Şifre yalnızca bu bilgisayarda, Windows'un korumasıyla saklanır.</p>
+        <figure><img src="img/2-panel.png" alt="Panel hesabı ekranı" width="724" height="524" loading="lazy"></figure>
+      </div></div>
+
+      <div class="kart adim"><span class="no">5</span><div>
+        <h3>WhatsApp (isteğe bağlı)</h3>
+        <p>Etkinlikler için WhatsApp grubu kurmak istiyorsanız ofisin WhatsApp numarasını bağlayın: <kbd>QR ile bağla</kbd>'ya basın, telefonda WhatsApp → Ayarlar → Bağlı cihazlar → Cihaz bağla ile kodu okutun. İstemiyorsanız <kbd>Şimdilik atla</kbd>; sonra da bağlayabilirsiniz.</p>
+        <figure><img src="img/4-whatsapp-qr.png" alt="WhatsApp QR kodu ekranı" width="724" height="600" loading="lazy"></figure>
+      </div></div>
+
+      <div class="kart adim"><span class="no">6</span><div>
+        <h3>Claude Desktop'a bağlayın</h3>
+        <p><kbd>Kur ve bağla</kbd>'ya basın. Program bilgisayara kopyalanır, Claude Desktop'a eklenir ve Başlat menüsüne "Staff Asistan" kısayolu konur. "Bağlantı denendi: çalışıyor" yazınca <kbd>İleri</kbd>.</p>
+        <figure><img src="img/6-claude-tamam.png" alt="Claude Desktop'a bağlama ekranı" width="724" height="495" loading="lazy"></figure>
+      </div></div>
+
+      <div class="kart adim"><span class="no">7</span><div>
+        <h3>Claude Desktop'u yeniden açın</h3>
+        <p>Claude Desktop açıksa tamamen kapatın: saatin yanındaki sistem tepsisinde Claude simgesine sağ tıklayın → <kbd>Exit</kbd>. Sonra yeniden açın ve deneyin, örneğin: <i>"1106 proformasını hazırla"</i>.</p>
+        <p class="soluk">İndirdiğiniz dosyayı artık silebilirsiniz; program kendi kopyasıyla çalışır.</p>
+        <figure><img src="img/7-bitti.png" alt="Kurulum tamam ekranı" width="724" height="464" loading="lazy"></figure>
+      </div></div>
+    </section>
+
+    <section>
+      <h2 id="guncelleme">Güncelleme</h2>
+      <div class="kart">
+        <p>Yeni sürüm çıktığında:</p>
+        <ol>
+          <li>Bu sayfadan yeni dosyayı indirin.</li>
+          <li>Claude Desktop'u tamamen kapatın (sistem tepsisi → Claude → <kbd>Exit</kbd>).</li>
+          <li>İndirilen dosyaya çift tıklayın; açılan pencerede Claude Desktop satırındaki <kbd>Güncelle</kbd>'ye basın.</li>
+          <li>Claude Desktop'u açın.</li>
+        </ol>
+        <p class="soluk">Lisans, panel hesabı ve WhatsApp bağlantısı olduğu gibi kalır.</p>
+        <figure><img src="img/8-guncelle.png" alt="Güncelle düğmeli ayarlar ekranı" width="724" height="595" loading="lazy"></figure>
+        <div id="neler" hidden>
+          <h3 style="margin-top:20px">Bu sürümde neler değişti</h3>
+          <p id="notlar"></p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 id="ayarlar">Ayarları değiştirme</h2>
+      <div class="kart">
+        <p>Başlat menüsünden <b>Staff Asistan</b>'ı açın. Lisans anahtarı, panel hesabı ve WhatsApp numarası buradan değiştirilir.</p>
+        <p class="soluk">Değişiklikten sonra Claude Desktop'u tamamen kapatıp yeniden açın.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 id="kaldirma">Kaldırma</h2>
+      <div class="kart">
+        <p>Önce Claude Desktop'u tamamen kapatın. Sonra <kbd>Ayarlar</kbd> → <kbd>Uygulamalar</kbd> → <kbd>Yüklü uygulamalar</kbd> → <b>Staff Asistan</b> → <kbd>Kaldır</kbd>. Ya da Başlat menüsünden Staff Asistan'ı açıp en alttaki "Staff Asistan'ı bu bilgisayardan kaldır" bağlantısına basın.</p>
+        <p class="soluk">Hazırladığınız proformalar silinmez.</p>
+        <figure><img src="img/9-kaldir.png" alt="Kaldırma ekranı" width="724" height="566" loading="lazy"></figure>
+      </div>
+    </section>
+
+    <section>
+      <h2 id="sorunlar">Sorun giderme</h2>
+      <div class="kart">
+        <details>
+          <summary>Edge ya da Windows dosyayı açmama izin vermiyor</summary>
+          <p>Program yeni ve yaygın olmadığı için Windows uyarı verir. Dosyayı yalnızca bu sayfadan indirdiyseniz: Edge'de <kbd>…</kbd> → <kbd>Sakla</kbd> → <kbd>Daha fazla göster</kbd> → <kbd>Yine de sakla</kbd>; açarken <kbd>Ek bilgi</kbd> → <kbd>Yine de çalıştır</kbd>.</p>
+        </details>
+        <details>
+          <summary>Claude Desktop'ta Staff Asistan görünmüyor</summary>
+          <p>Claude Desktop'u pencereyi kapatarak değil, sistem tepsisinden <kbd>Exit</kbd> ile kapatıp yeniden açın. Olmazsa Başlat menüsünden Staff Asistan'ı açın ve Claude Desktop satırında <kbd>Bağla</kbd> ya da <kbd>Güncelle</kbd>'ye basın.</p>
+        </details>
+        <details>
+          <summary>Güncelle "dosya kullanımda" hatası veriyor</summary>
+          <p>Claude Desktop hâlâ açık. Sistem tepsisinden <kbd>Exit</kbd> ile kapatıp <kbd>Tekrar dene</kbd>'ye basın.</p>
+        </details>
+        <details>
+          <summary>"Lisans süresi doldu" yazıyor</summary>
+          <p>Staff Asistan sağlayıcısından yeni lisans anahtarı isteyin. Başlat menüsü → Staff Asistan → Lisans satırında <kbd>Değiştir</kbd>.</p>
+        </details>
+        <details>
+          <summary>Panel şifresi değişti</summary>
+          <p>Başlat menüsü → Staff Asistan → Panel hesabı satırında <kbd>Hesabı değiştir</kbd>.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Staff Asistan · <a href="https://github.com/EfeSipahi/staff-asistan-kurulum/releases">Tüm sürümler</a><span id="ozet" hidden> · SHA-256: <code id="ozetDeger"></code></span></p>
+  </footer>
+</div>
+
+<script>
+  // Son sürümün numarası, tarihi, boyutu ve notları. Okunamazsa İndir düğmesi yine çalışır (her zaman son sürüme gider).
+  (async () => {
+    try {
+      const r = await fetch("https://api.github.com/repos/EfeSipahi/staff-asistan-kurulum/releases/latest", { headers: { Accept: "application/vnd.github+json" } });
+      if (!r.ok) return;
+      const s = await r.json();
+      const exe = (s.assets || []).find((a) => a.name === "StaffAsistan.exe");
+      const tarih = new Date(s.published_at).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+      const boyut = exe ? ` · ${Math.round(exe.size / 1048576)} MB` : "";
+      const surum = document.getElementById("surum");
+      surum.textContent = `Sürüm ${String(s.tag_name).replace(/^v/, "")} · ${tarih}${boyut}`;
+      surum.hidden = false;
+      const govde = String(s.body || "");
+      const ozet = govde.match(/SHA-256:\s*([0-9a-f]{64})/i);
+      const notlar = govde.replace(/SHA-256:\s*[0-9a-f]{64}/i, "").trim();
+      if (notlar) { document.getElementById("notlar").textContent = notlar; document.getElementById("neler").hidden = false; }
+      if (ozet) { document.getElementById("ozetDeger").textContent = ozet[1]; document.getElementById("ozet").hidden = false; }
+    } catch {}
+  })();
+</script>
+</body>
+</html>
